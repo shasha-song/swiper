@@ -28,9 +28,8 @@ function Swiper(ele, options = {
     this.next()
     this.prev()
     this.onCircle()
-    if (this.options.autoplay) {
-        let timer = setInterval(this.nextBtn.onclick, this.options.time * 1000 || 2000)
-    }
+    this.auto()
+    this.stop()
 
 }
 Swiper.prototype.setStyle = function () {
@@ -114,7 +113,6 @@ Swiper.prototype.circlesMove = function () {
 }
 // 事件委托 e.target小圆点点击 去到对应位置图片
 Swiper.prototype.onCircle = function () {
-
     this.ol.onclick = (e) => {
         // console.log(e.target)
         if (e.target.tagName.toLowerCase() == 'li') {
@@ -131,5 +129,20 @@ Swiper.prototype.onCircle = function () {
             */
             // bug 一上来直接点击小圆点就没有动画效果，必须点一下按钮之后才会有匀速动画的效果
         }
+    }
+}
+// 自动轮播 
+Swiper.prototype.auto = function () {
+    if (this.options.autoplay) {
+        this.timer = setInterval(this.nextBtn.onclick, this.options.time * 1000 || 2000)
+    }
+}
+// 鼠标悬停 轮播停止 移出继续
+Swiper.prototype.stop = function () {
+    this.ele.onmouseenter = () => {
+        clearInterval(this.timer)
+    }
+    this.ele.onmouseleave = () => {
+        this.auto()
     }
 }
