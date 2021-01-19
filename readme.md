@@ -1,6 +1,7 @@
 html结构：
 
-```
+` ``javascript
+
     <div class="box">
         <!-- 图片列表 -->
         <ul class="images-list">
@@ -21,25 +22,30 @@ html结构：
             <li class="selected"></li>
         </ol>
     </div>
-```
+` ``
 
 使用
 
-```
+
+` ``javascript
+
 new Swiper(ele, {
     autoplay: Boolean,
     time: Number
 })
-```
+` ``
 
 示例
 
-```
+
+` ``javascript
+
+
 new Swiper('.box',{
         autoplay: true, // 设置自动轮播效果，默认true
         time: 3 // 自动轮播间隔时间，默认2s 
     })
-```
+` ``
 
 
 
