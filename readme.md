@@ -26,7 +26,10 @@ html结构：
 使用
 
 ```
-
+new Swiper(ele, {
+    autoplay: Boolean,
+    time: Number
+})
 ```
 
 示例
