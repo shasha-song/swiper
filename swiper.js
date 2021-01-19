@@ -24,6 +24,8 @@ function Swiper(ele, options = {
     this.percent = 1 / (this.len + 2) * 100
     // 定义当前正在显示的图片的index
     this.index = 0
+    // 节流锁
+    this.isLock = true;
     this.setStyle()
     this.next()
     this.prev()
@@ -56,6 +58,14 @@ Swiper.prototype.setStyle = function () {
 // 右边按钮点击效果
 Swiper.prototype.next = function () {
     this.nextBtn.onclick = () => {
+        // 判断节流锁状态 如果关闭 什么都不做
+        if (!this.isLock) return;
+        // 关锁
+        this.isLock = false;
+        // 500毫秒之后开锁
+        setTimeout(() => {
+            this.isLock = true
+        }, 500);
         this.index++;
         // console.log(this.index)
         this.ul.style.transform = `translateX(${-this.percent * this.index}%)`
@@ -78,6 +88,14 @@ Swiper.prototype.next = function () {
 // 左边按钮点击效果
 Swiper.prototype.prev = function () {
     this.prevBtn.onclick = () => {
+        // 判断节流锁状态 如果关闭 什么都不做
+        if (!this.isLock) return;
+        // 关锁
+        this.isLock = false;
+        // 500毫秒之后开锁
+        setTimeout(() => {
+            this.isLock = true
+        }, 500);
         // 如果index是0 说明是第一张图片，点击左边按钮就要瞬间去到假图，利用异步定时器延迟0毫秒的效果，然后去到最后一张，接着往后走
         // console.log(this.index)
         // console.log(this.index % this.len)
@@ -146,3 +164,4 @@ Swiper.prototype.stop = function () {
         this.auto()
     }
 }
+
